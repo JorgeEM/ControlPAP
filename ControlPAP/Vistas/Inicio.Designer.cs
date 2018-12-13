@@ -41,14 +41,15 @@
             // btnEmpleado
             // 
             this.btnEmpleado.BackColor = System.Drawing.Color.Transparent;
+            this.btnEmpleado.BackgroundImage = global::ControlPAP.Properties.Resources.Empleados;
             this.btnEmpleado.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnEmpleado.FlatAppearance.BorderSize = 0;
             this.btnEmpleado.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnEmpleado.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnEmpleado.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnEmpleado.Location = new System.Drawing.Point(501, 196);
+            this.btnEmpleado.Location = new System.Drawing.Point(435, 196);
             this.btnEmpleado.Name = "btnEmpleado";
-            this.btnEmpleado.Size = new System.Drawing.Size(184, 173);
+            this.btnEmpleado.Size = new System.Drawing.Size(250, 173);
             this.btnEmpleado.TabIndex = 5;
             this.btnEmpleado.Tag = "Empleado";
             this.btnEmpleado.Text = "EMPLEADOS";
@@ -57,6 +58,7 @@
             // btnAlmacen
             // 
             this.btnAlmacen.BackColor = System.Drawing.Color.Transparent;
+            this.btnAlmacen.BackgroundImage = global::ControlPAP.Properties.Resources.Inventario;
             this.btnAlmacen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAlmacen.FlatAppearance.BorderSize = 0;
             this.btnAlmacen.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -64,7 +66,7 @@
             this.btnAlmacen.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAlmacen.Location = new System.Drawing.Point(113, 196);
             this.btnAlmacen.Name = "btnAlmacen";
-            this.btnAlmacen.Size = new System.Drawing.Size(237, 173);
+            this.btnAlmacen.Size = new System.Drawing.Size(215, 173);
             this.btnAlmacen.TabIndex = 4;
             this.btnAlmacen.Tag = "Productos";
             this.btnAlmacen.Text = "ALMACEN";

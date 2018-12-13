@@ -48,7 +48,7 @@ namespace ControlPAP.Funciones
 
         public static Mensajes.General altaPersona(string nombre, string usuario, string contraseña, double pago, bool nivel)
         {
-            var persona = new Persona()
+            var persona = new BaseDeDatos.Persona()
             {
                 nombre = nombre,
                 usuario = usuario,
@@ -63,15 +63,22 @@ namespace ControlPAP.Funciones
             {
                 if (controlPAP.SaveChanges() == 1)
                 {
+                    MessageBox.Show("Usuario añadido a la plantilla", Mensajes.General.Ok.ToString(),
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return Mensajes.General.Ok;
                 }
                 else
                 {
+                    MessageBox.Show("El usuario no pudo ser añadido", Mensajes.General.Aviso.ToString(),
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return Mensajes.General.Aviso;
                 }
             }
             catch (Exception e)
             {
+                MessageBox.Show(
+                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " + e.Message,
+                    Mensajes.General.Error.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return Mensajes.General.Error;
             }
         }
@@ -87,15 +94,22 @@ namespace ControlPAP.Funciones
 
                 if (controlPAP.SaveChanges() == 1)
                 {
+                    MessageBox.Show("Usuario actualizado", Mensajes.General.Ok.ToString(),
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return Mensajes.General.Ok;
                 }
                 else
                 {
+                    MessageBox.Show("El usuario no pudo ser actualizado", Mensajes.General.Aviso.ToString(),
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return Mensajes.General.Aviso;
                 }
             }
             catch (Exception e)
             {
+                MessageBox.Show(
+                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " + e.Message,
+                    Mensajes.General.Error.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return Mensajes.General.Error;
             }
         }
@@ -109,19 +123,23 @@ namespace ControlPAP.Funciones
                     var persona = controlPAP.Personas.FirstOrDefault(x => x.usuario == campo);
                     controlPAP.Personas.Remove(persona);
                     controlPAP.SaveChanges();
-                    return Mensajes.General.Ok;
                 }
                 else
                 {
                     var producto = controlPAP.Productos.FirstOrDefault(x => x.nombre == campo);
                     controlPAP.Productos.Remove(producto);
                     controlPAP.SaveChanges();
-                    return Mensajes.General.Ok;
                 }
 
+                MessageBox.Show(precedencia + " eliminado correctamente", Mensajes.General.Ok.ToString(),
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return Mensajes.General.Ok;
             }
             catch (Exception e)
             {
+                MessageBox.Show(
+                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " + e.Message,
+                    Mensajes.General.Error.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return Mensajes.General.Error;
             }
         }
@@ -143,15 +161,22 @@ namespace ControlPAP.Funciones
             {
                 if (controlPAP.SaveChanges() == 1)
                 {
+                    MessageBox.Show("Producto añadido al inventario", Mensajes.General.Ok.ToString(),
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return Mensajes.General.Ok;
                 }
                 else
                 {
+                    MessageBox.Show("El producto no pudo ser añadido", Mensajes.General.Aviso.ToString(),
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return Mensajes.General.Aviso;
                 }
             }
             catch (Exception e)
             {
+                MessageBox.Show(
+                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " + e.Message,
+                    Mensajes.General.Error.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return Mensajes.General.Error;
             }
         }
@@ -167,15 +192,22 @@ namespace ControlPAP.Funciones
 
                 if (controlPAP.SaveChanges() == 1)
                 {
+                    MessageBox.Show("Producto actualizado", Mensajes.General.Ok.ToString(),
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return Mensajes.General.Ok;
                 }
                 else
                 {
+                    MessageBox.Show("El producto no pudo ser actualizado", Mensajes.General.Aviso.ToString(),
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return Mensajes.General.Aviso;
                 }
             }
             catch (Exception e)
             {
+                MessageBox.Show(
+                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " + e.Message,
+                    Mensajes.General.Error.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return Mensajes.General.Error;
             }
         }
@@ -206,23 +238,34 @@ namespace ControlPAP.Funciones
             }
             catch (Exception e)
             {
-                throw;
+                MessageBox.Show(
+                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " + e.Message,
+                    Mensajes.General.Error.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         public static object llenarDatos(string precedencia, string campo)
         {
-            object obj;
+            object obj = null;
 
-            if (precedencia.Equals("Empleado"))
+            try
             {
-                obj = controlPAP.Personas.FirstOrDefault(x => x.usuario == campo);
-            }
-            else
-            {
-                obj = controlPAP.Productos.FirstOrDefault(x => x.nombre == campo);
-            }
+                if (precedencia.Equals("Empleado"))
+                {
+                    obj = controlPAP.Personas.FirstOrDefault(x => x.usuario == campo);
+                }
+                else
+                {
+                    obj = controlPAP.Productos.FirstOrDefault(x => x.nombre == campo);
+                }
 
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(
+                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " + e.Message,
+                    Mensajes.General.Error.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             return obj;
         }
 
@@ -239,7 +282,9 @@ namespace ControlPAP.Funciones
             }
             catch (Exception e)
             {
-                throw;
+                MessageBox.Show(
+                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " + e.Message,
+                    Mensajes.General.Error.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

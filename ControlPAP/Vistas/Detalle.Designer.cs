@@ -53,12 +53,12 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.grpBxProducto = new System.Windows.Forms.GroupBox();
             this.txtProDescripcion = new System.Windows.Forms.TextBox();
+            this.productoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txtProDescuento = new System.Windows.Forms.TextBox();
             this.txtProExistencia = new System.Windows.Forms.TextBox();
             this.txtProNombre = new System.Windows.Forms.TextBox();
             this.txtProPrecio = new System.Windows.Forms.TextBox();
             this.cmbBxSeleccion = new System.Windows.Forms.ComboBox();
-            this.productoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.personaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             lblEmpContraseña = new System.Windows.Forms.Label();
             lblEmpNivel = new System.Windows.Forms.Label();
@@ -290,6 +290,7 @@
             // btnAceptar
             // 
             this.btnAceptar.BackColor = System.Drawing.Color.Transparent;
+            this.btnAceptar.BackgroundImage = global::ControlPAP.Properties.Resources.Guardar;
             this.btnAceptar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAceptar.FlatAppearance.BorderSize = 0;
             this.btnAceptar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -333,6 +334,10 @@
             this.txtProDescripcion.Size = new System.Drawing.Size(302, 27);
             this.txtProDescripcion.TabIndex = 1;
             // 
+            // productoBindingSource
+            // 
+            this.productoBindingSource.DataSource = typeof(ControlPAP.BaseDeDatos.Producto);
+            // 
             // txtProDescuento
             // 
             this.txtProDescuento.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productoBindingSource, "Descuento", true));
@@ -371,7 +376,9 @@
             // 
             // cmbBxSeleccion
             // 
+            this.cmbBxSeleccion.BackColor = System.Drawing.Color.Gainsboro;
             this.cmbBxSeleccion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBxSeleccion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbBxSeleccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.cmbBxSeleccion.FormattingEnabled = true;
             this.cmbBxSeleccion.Location = new System.Drawing.Point(576, 180);
@@ -379,10 +386,6 @@
             this.cmbBxSeleccion.Size = new System.Drawing.Size(202, 28);
             this.cmbBxSeleccion.TabIndex = 29;
             this.cmbBxSeleccion.SelectedIndexChanged += new System.EventHandler(this.cmbBxSeleccion_SelectedIndexChanged);
-            // 
-            // productoBindingSource
-            // 
-            this.productoBindingSource.DataSource = typeof(ControlPAP.BaseDeDatos.Producto);
             // 
             // personaBindingSource
             // 

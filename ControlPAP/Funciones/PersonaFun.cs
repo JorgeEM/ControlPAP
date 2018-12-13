@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using ControlPAP.BaseDeDatos;
 
 namespace ControlPAP.Funciones
 {
-    class Personas
+    class PersonaFun
     {
         public static string conn = "ControlPAP";
         static DB_ControlPAP controlPAP = new DB_ControlPAP(conn);
@@ -24,12 +25,17 @@ namespace ControlPAP.Funciones
                 }
                 else
                 {
+                    MessageBox.Show("No se encontraron usuarios en el sistema", Mensajes.General.Aviso.ToString(),
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return Mensajes.General.Aviso;
                 }
 
             }
             catch (Exception e)
             {
+                MessageBox.Show(
+                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " + e.Message,
+                    Mensajes.General.Error.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return Mensajes.General.Error;
             }
         }
@@ -51,15 +57,23 @@ namespace ControlPAP.Funciones
                     {
                         formLogIn.nivel = false;
                     }
+
+                    MessageBox.Show("Usuario encontrado :D", Mensajes.General.Ok.ToString(), MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                     return Mensajes.General.Ok;
                 }
                 else
                 {
+                    MessageBox.Show("Usuario no encontrado :(", Mensajes.General.Aviso.ToString(), MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
                     return Mensajes.General.Aviso;
                 }
             }
             catch (Exception e)
             {
+                MessageBox.Show(
+                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\nError: " + e.Message,
+                    Mensajes.General.Error.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return Mensajes.General.Error;
             }
         }

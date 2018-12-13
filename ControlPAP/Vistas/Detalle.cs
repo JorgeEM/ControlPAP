@@ -63,6 +63,7 @@ namespace ControlPAP.Vistas
             if (Funciones.Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Agregar)
             {
                 cmbBxSeleccion.Visible = false;
+                chkEmpNivel.Visible = false;
             }
             else
             {
@@ -81,8 +82,17 @@ namespace ControlPAP.Vistas
             }
             else if (Funciones.Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Eliminar)
             {
+                MessageBox.Show("Entro en la seccion de eliminar!!\nLo que elimine no podra ser recuperado",
+                    Mensajes.General.Aviso.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 grpBxProducto.Enabled = false;
                 grpBxPersona.Enabled = false;
+            }
+
+            if (Funciones.Sistema.verificarCategoria(precedencia) == Mensajes.Seccion.Producto
+                && Funciones.Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Actualizar)
+            {
+                MessageBox.Show("En caso de actualizar la existencia del producto debera sumarla al actual",
+                    Mensajes.General.Aviso.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }
@@ -137,9 +147,9 @@ namespace ControlPAP.Vistas
             {
                 var obj = Funciones.Sistema.llenarDatos(precedencia, cmbBxSeleccion.Text);
 
-                if (obj.GetType() == typeof(Persona))
+                if (obj.GetType() == typeof(BaseDeDatos.Persona))
                 {
-                    Persona persona = (Persona)obj;
+                    BaseDeDatos.Persona persona = (BaseDeDatos.Persona)obj;
                     txtEmpNombre.Text = persona.nombre;
                     txtEmpUsuario.Text = persona.usuario;
                     txtEmpContraseña.Text = persona.contraseña;

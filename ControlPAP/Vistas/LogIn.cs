@@ -26,7 +26,7 @@ namespace ControlPAP
             txtBxUsuario.Text = "";
             txtBxContraseña.Text = "";
 
-            if (Funciones.Personas.verificarPersonas() == Mensajes.General.Ok)
+            if (Funciones.PersonaFun.verificarPersonas() == Mensajes.General.Ok)
             {
                 btnRegistrar.Visible = false;
                 btnEntrar.Visible = true;
@@ -40,7 +40,7 @@ namespace ControlPAP
 
         private void formLogIn_Load(object sender, EventArgs e)
         {
-            if (Funciones.Personas.verificarPersonas() == Mensajes.General.Ok)
+            if (Funciones.PersonaFun.verificarPersonas() == Mensajes.General.Ok)
             {
                 btnRegistrar.Visible = false;
                 btnEntrar.Visible = true;
@@ -49,12 +49,15 @@ namespace ControlPAP
             {
                 btnRegistrar.Visible = true;
                 btnEntrar.Visible = false;
+
+                MessageBox.Show("Primero debe registrar al usuario Administrador", "USUARIO", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
         }
 
         private void btnEntrar_Click(object sender, EventArgs e)
         {
-            if (Funciones.Personas.verificarDatos(txtBxUsuario.Text, txtBxContraseña.Text) == Mensajes.General.Ok)
+            if (Funciones.PersonaFun.verificarDatos(txtBxUsuario.Text, txtBxContraseña.Text) == Mensajes.General.Ok)
             {
                 if (nivel)
                 {

@@ -55,8 +55,8 @@
   <ItemGroup>
     <Compile Include="BaseDeDatos\DB ControlPAP.cs" />
     <Compile Include="Funciones\Mensajes.cs" />
-    <Compile Include="Funciones\Personas.cs" />
-    <Compile Include="Funciones\Producto.cs" />
+    <Compile Include="Funciones\PersonaFun.cs" />
+    <Compile Include="Funciones\ProductoFun.cs" />
     <Compile Include="Funciones\Sistema.cs" />
     <Compile Include="Vistas\Administrar.cs">
       <SubType>Form</SubType>
@@ -178,6 +178,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\FondoDetalles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Empleados.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Inventario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Guardar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Añadir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vender.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

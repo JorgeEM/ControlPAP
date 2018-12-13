@@ -25,18 +25,6 @@ namespace ControlPAP.BaseDeDatos
         public double precio { get; set; }
         public int existencia { get; set; }
         public int descuento { get; set; }
-
-        //public int compra
-        //{
-        //    get => compra;
-        //    set { existencia += compra; }
-        //}
-
-        //public int venta
-        //{
-        //    get => venta;
-        //    set { existencia -= venta; }
-        //}
     }
 
     class Persona
