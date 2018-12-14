@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ControlPAP.Funciones
+﻿namespace ControlPAP.Funciones
 {
-    class Mensajes
+    internal class Mensajes
     {
         public enum General
         {

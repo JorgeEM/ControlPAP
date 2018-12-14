@@ -1,54 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ControlPAP.BaseDeDatos;
-using ControlPAP.Vistas;
 
 namespace ControlPAP.Funciones
 {
-    class Sistema
+    internal class Sistema
     {
         public static string conn = "ControlPAP";
-        static DB_ControlPAP controlPAP = new DB_ControlPAP(conn);
+        private static readonly DB_ControlPAP controlPAP = new DB_ControlPAP(conn);
 
         public static Mensajes.Seccion verificarCategoria(string precedencia)
         {
             if (precedencia.Equals("Administrador"))
-            {
                 return Mensajes.Seccion.Administrador;
-            }
-            else if (precedencia.Equals("Empleado"))
-            {
+            if (precedencia.Equals("Empleado"))
                 return Mensajes.Seccion.Empleado;
-            }
-            else
-            {
-                return Mensajes.Seccion.Producto;
-            }
+            return Mensajes.Seccion.Producto;
         }
 
         public static Mensajes.Accion verificarSeleccion(string seleccion)
         {
             if (seleccion.Equals("Agregar"))
-            {
                 return Mensajes.Accion.Agregar;
-            }
-            else if (seleccion.Equals("Actualizar"))
-            {
+            if (seleccion.Equals("Actualizar"))
                 return Mensajes.Accion.Actualizar;
-            }
-            else
-            {
-                return Mensajes.Accion.Eliminar;
-            }
+            return Mensajes.Accion.Eliminar;
         }
 
-        public static Mensajes.General altaPersona(string nombre, string usuario, string contraseña, double pago, bool nivel)
+        public static Mensajes.General altaPersona(string nombre, string usuario, string contraseña, double pago,
+            bool nivel)
         {
-            var persona = new BaseDeDatos.Persona()
+            var persona = new Persona
             {
                 nombre = nombre,
                 usuario = usuario,
@@ -67,17 +50,16 @@ namespace ControlPAP.Funciones
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return Mensajes.General.Ok;
                 }
-                else
-                {
-                    MessageBox.Show("El usuario no pudo ser añadido", Mensajes.General.Aviso.ToString(),
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return Mensajes.General.Aviso;
-                }
+
+                MessageBox.Show("El usuario no pudo ser añadido", Mensajes.General.Aviso.ToString(),
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return Mensajes.General.Aviso;
             }
             catch (Exception e)
             {
                 MessageBox.Show(
-                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " + e.Message,
+                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " +
+                    e.Message,
                     Mensajes.General.Error.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return Mensajes.General.Error;
             }
@@ -98,17 +80,16 @@ namespace ControlPAP.Funciones
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return Mensajes.General.Ok;
                 }
-                else
-                {
-                    MessageBox.Show("El usuario no pudo ser actualizado", Mensajes.General.Aviso.ToString(),
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return Mensajes.General.Aviso;
-                }
+
+                MessageBox.Show("El usuario no pudo ser actualizado", Mensajes.General.Aviso.ToString(),
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return Mensajes.General.Aviso;
             }
             catch (Exception e)
             {
                 MessageBox.Show(
-                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " + e.Message,
+                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " +
+                    e.Message,
                     Mensajes.General.Error.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return Mensajes.General.Error;
             }
@@ -138,15 +119,17 @@ namespace ControlPAP.Funciones
             catch (Exception e)
             {
                 MessageBox.Show(
-                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " + e.Message,
+                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " +
+                    e.Message,
                     Mensajes.General.Error.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return Mensajes.General.Error;
             }
         }
 
-        public static Mensajes.General altaProducto(string nombre, string descripcion, double precio, int existencia, int descuento)
+        public static Mensajes.General altaProducto(string nombre, string descripcion, double precio, int existencia,
+            int descuento)
         {
-            var producto = new Producto()
+            var producto = new Producto
             {
                 nombre = nombre,
                 descripcion = descripcion,
@@ -165,17 +148,16 @@ namespace ControlPAP.Funciones
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return Mensajes.General.Ok;
                 }
-                else
-                {
-                    MessageBox.Show("El producto no pudo ser añadido", Mensajes.General.Aviso.ToString(),
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return Mensajes.General.Aviso;
-                }
+
+                MessageBox.Show("El producto no pudo ser añadido", Mensajes.General.Aviso.ToString(),
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return Mensajes.General.Aviso;
             }
             catch (Exception e)
             {
                 MessageBox.Show(
-                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " + e.Message,
+                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " +
+                    e.Message,
                     Mensajes.General.Error.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return Mensajes.General.Error;
             }
@@ -196,17 +178,16 @@ namespace ControlPAP.Funciones
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return Mensajes.General.Ok;
                 }
-                else
-                {
-                    MessageBox.Show("El producto no pudo ser actualizado", Mensajes.General.Aviso.ToString(),
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return Mensajes.General.Aviso;
-                }
+
+                MessageBox.Show("El producto no pudo ser actualizado", Mensajes.General.Aviso.ToString(),
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return Mensajes.General.Aviso;
             }
             catch (Exception e)
             {
                 MessageBox.Show(
-                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " + e.Message,
+                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " +
+                    e.Message,
                     Mensajes.General.Error.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return Mensajes.General.Error;
             }
@@ -220,26 +201,22 @@ namespace ControlPAP.Funciones
                 {
                     var personas = controlPAP.Personas;
 
-                    foreach (var persona in personas)
-                    {
-                        elemento.Items.Add(persona.usuario);
-                    }
+                    // Añade los empleados al comboBox para visualizarlos como lista
+                    foreach (var persona in personas) elemento.Items.Add(persona.usuario);
                 }
                 else
                 {
                     var productos = controlPAP.Productos;
 
-                    foreach (var producto in productos)
-                    {
-                        elemento.Items.Add(producto.nombre);
-                    }
+                    // Añade los productos al comboBox para visualizarlos como lista
+                    foreach (var producto in productos) elemento.Items.Add(producto.nombre);
                 }
-
             }
             catch (Exception e)
             {
                 MessageBox.Show(
-                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " + e.Message,
+                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " +
+                    e.Message,
                     Mensajes.General.Error.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -251,21 +228,20 @@ namespace ControlPAP.Funciones
             try
             {
                 if (precedencia.Equals("Empleado"))
-                {
+                    //Agregar la informacion de empleado a los detalles
                     obj = controlPAP.Personas.FirstOrDefault(x => x.usuario == campo);
-                }
                 else
-                {
+                    //Agregar la informacion de productos a los detalles
                     obj = controlPAP.Productos.FirstOrDefault(x => x.nombre == campo);
-                }
-
             }
             catch (Exception e)
             {
                 MessageBox.Show(
-                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " + e.Message,
+                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " +
+                    e.Message,
                     Mensajes.General.Error.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
             return obj;
         }
 
@@ -275,15 +251,14 @@ namespace ControlPAP.Funciones
             {
                 var productos = controlPAP.Productos;
 
-                foreach (var producto in productos)
-                {
-                    elemento.Items.Add(producto.nombre);
-                }
+                //Llenar el comboBox con la lista de procuctos con los que se cuentan
+                foreach (var producto in productos) elemento.Items.Add(producto.nombre);
             }
             catch (Exception e)
             {
                 MessageBox.Show(
-                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " + e.Message,
+                    "Se obtuvo un error en la Base de Datos, por favor contacte al administrador!!\n Error: " +
+                    e.Message,
                     Mensajes.General.Error.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

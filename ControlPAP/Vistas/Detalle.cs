@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ControlPAP.BaseDeDatos;
 using ControlPAP.Funciones;
@@ -14,9 +7,9 @@ namespace ControlPAP.Vistas
 {
     public partial class formDetalle : Form
     {
-        private string usuario;
-        private string precedencia;
-        private string seleccion;
+        private readonly string usuario;
+        private readonly string precedencia;
+        private readonly string seleccion;
 
         public formDetalle(string usuario, string precedencia, string seleccion)
         {
@@ -33,7 +26,7 @@ namespace ControlPAP.Vistas
             lblSeccion.Text = seleccion;
             btnAceptar.Text = "";
 
-            if (Funciones.Sistema.verificarCategoria(precedencia) == Mensajes.Seccion.Administrador)
+            if (Sistema.verificarCategoria(precedencia) == Mensajes.Seccion.Administrador)
             {
                 grpBxPersona.Visible = true;
                 grpBxPersona.Enabled = true;
@@ -47,7 +40,7 @@ namespace ControlPAP.Vistas
                 txtEmpPago.Enabled = false;
                 chkEmpNivel.Enabled = false;
             }
-            else if (Funciones.Sistema.verificarCategoria(precedencia) == Mensajes.Seccion.Empleado)
+            else if (Sistema.verificarCategoria(precedencia) == Mensajes.Seccion.Empleado)
             {
                 grpBxPersona.Visible = true;
                 grpBxPersona.Enabled = true;
@@ -60,7 +53,7 @@ namespace ControlPAP.Vistas
                 grpBxProducto.Enabled = true;
             }
 
-            if (Funciones.Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Agregar)
+            if (Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Agregar)
             {
                 cmbBxSeleccion.Visible = false;
                 chkEmpNivel.Visible = false;
@@ -70,17 +63,17 @@ namespace ControlPAP.Vistas
                 cmbBxSeleccion.Visible = true;
                 cmbBxSeleccion.Items.Add("Selccionar ...");
                 cmbBxSeleccion.SelectedIndex = 0;
-                Funciones.Sistema.llenarDetalle(precedencia, cmbBxSeleccion);
+                Sistema.llenarDetalle(precedencia, cmbBxSeleccion);
             }
 
-            if (Funciones.Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Actualizar)
+            if (Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Actualizar)
             {
                 txtEmpNombre.Enabled = false;
                 chkEmpNivel.Enabled = false;
                 txtProNombre.Enabled = false;
                 txtProDescripcion.Enabled = false;
             }
-            else if (Funciones.Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Eliminar)
+            else if (Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Eliminar)
             {
                 MessageBox.Show("Entro en la seccion de eliminar!!\nLo que elimine no podra ser recuperado",
                     Mensajes.General.Aviso.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -88,54 +81,40 @@ namespace ControlPAP.Vistas
                 grpBxPersona.Enabled = false;
             }
 
-            if (Funciones.Sistema.verificarCategoria(precedencia) == Mensajes.Seccion.Producto
-                && Funciones.Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Actualizar)
-            {
+            if (Sistema.verificarCategoria(precedencia) == Mensajes.Seccion.Producto
+                && Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Actualizar)
                 MessageBox.Show("En caso de actualizar la existencia del producto debera sumarla al actual",
                     Mensajes.General.Aviso.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (Funciones.Sistema.verificarCategoria(precedencia) == Mensajes.Seccion.Administrador ||
-                Funciones.Sistema.verificarCategoria(precedencia) == Mensajes.Seccion.Empleado)
+            if (Sistema.verificarCategoria(precedencia) == Mensajes.Seccion.Administrador ||
+                Sistema.verificarCategoria(precedencia) == Mensajes.Seccion.Empleado)
             {
-                if (Funciones.Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Agregar)
-                {
+                if (Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Agregar)
                     Sistema.altaPersona(txtEmpNombre.Text, txtEmpUsuario.Text, txtEmpContraseña.Text,
                         Convert.ToDouble(txtEmpPago.Text), chkEmpNivel.Checked);
-                }
-                else if (Funciones.Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Actualizar && cmbBxSeleccion.SelectedIndex != 0)
-                {
-                    Funciones.Sistema.actualizarPersona(txtEmpNombre.Text, txtEmpUsuario.Text, txtEmpContraseña.Text,
+                else if (Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Actualizar &&
+                         cmbBxSeleccion.SelectedIndex != 0)
+                    Sistema.actualizarPersona(txtEmpNombre.Text, txtEmpUsuario.Text, txtEmpContraseña.Text,
                         Convert.ToDouble(txtEmpPago.Text));
-                }
-                else if (Funciones.Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Eliminar && cmbBxSeleccion.SelectedIndex != 0)
-                {
-                    Funciones.Sistema.Eliminar(precedencia, cmbBxSeleccion.Text);
-                }
+                else if (Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Eliminar &&
+                         cmbBxSeleccion.SelectedIndex != 0) Sistema.Eliminar(precedencia, cmbBxSeleccion.Text);
             }
             else
             {
-                if (Funciones.Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Agregar)
-                {
-                    Funciones.Sistema.altaProducto(txtProNombre.Text, txtProDescripcion.Text,
+                if (Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Agregar)
+                    Sistema.altaProducto(txtProNombre.Text, txtProDescripcion.Text,
                         Convert.ToDouble(txtProPrecio.Text), Convert.ToInt32(txtProExistencia.Text),
                         Convert.ToInt32(txtProDescuento.Text));
-                }
-                else if (Funciones.Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Actualizar &&
+                else if (Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Actualizar &&
                          cmbBxSeleccion.SelectedIndex != 0)
-                {
-                    Funciones.Sistema.actualizarProducto(txtProNombre.Text, Convert.ToDouble(txtProPrecio.Text),
+                    Sistema.actualizarProducto(txtProNombre.Text, Convert.ToDouble(txtProPrecio.Text),
                         Convert.ToInt32(txtProExistencia.Text), Convert.ToInt32(txtProDescuento.Text));
-                }
-                else if (Funciones.Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Eliminar &&
+                else if (Sistema.verificarSeleccion(seleccion) == Mensajes.Accion.Eliminar &&
                          cmbBxSeleccion.SelectedIndex != 0)
-                {
-                    Funciones.Sistema.Eliminar(precedencia, cmbBxSeleccion.Text);
-                }
+                    Sistema.Eliminar(precedencia, cmbBxSeleccion.Text);
             }
 
             Close();
@@ -145,11 +124,11 @@ namespace ControlPAP.Vistas
         {
             if (cmbBxSeleccion.SelectedIndex != 0)
             {
-                var obj = Funciones.Sistema.llenarDatos(precedencia, cmbBxSeleccion.Text);
+                var obj = Sistema.llenarDatos(precedencia, cmbBxSeleccion.Text);
 
-                if (obj.GetType() == typeof(BaseDeDatos.Persona))
+                if (obj.GetType() == typeof(Persona))
                 {
-                    BaseDeDatos.Persona persona = (BaseDeDatos.Persona)obj;
+                    var persona = (Persona) obj;
                     txtEmpNombre.Text = persona.nombre;
                     txtEmpUsuario.Text = persona.usuario;
                     txtEmpContraseña.Text = persona.contraseña;
@@ -158,7 +137,7 @@ namespace ControlPAP.Vistas
                 }
                 else
                 {
-                    Producto prod = (Producto)obj;
+                    var prod = (Producto) obj;
                     txtProNombre.Text = prod.nombre;
                     txtProDescripcion.Text = prod.descripcion;
                     txtProPrecio.Text = prod.precio.ToString();

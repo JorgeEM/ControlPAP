@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ControlPAP
@@ -19,7 +12,7 @@ namespace ControlPAP
 
         private void formSplashScreen_Load(object sender, EventArgs e)
         {
-            int time = 5;
+            var time = 5;
             timerSplash.Interval = time * 1000;
             timerSplash.Start();
 
@@ -31,7 +24,7 @@ namespace ControlPAP
             timerSplash.Stop();
             Hide();
 
-            formLogIn logIn = new formLogIn();
+            var logIn = new formLogIn();
             logIn.ShowDialog(this);
 
             Application.Exit();

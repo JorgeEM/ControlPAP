@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ControlPAP.Funciones;
 using ControlPAP.Vistas;
@@ -26,7 +19,7 @@ namespace ControlPAP
             txtBxUsuario.Text = "";
             txtBxContraseña.Text = "";
 
-            if (Funciones.PersonaFun.verificarPersonas() == Mensajes.General.Ok)
+            if (PersonaFun.verificarPersonas() == Mensajes.General.Ok)
             {
                 btnRegistrar.Visible = false;
                 btnEntrar.Visible = true;
@@ -40,7 +33,7 @@ namespace ControlPAP
 
         private void formLogIn_Load(object sender, EventArgs e)
         {
-            if (Funciones.PersonaFun.verificarPersonas() == Mensajes.General.Ok)
+            if (PersonaFun.verificarPersonas() == Mensajes.General.Ok)
             {
                 btnRegistrar.Visible = false;
                 btnEntrar.Visible = true;
@@ -57,11 +50,11 @@ namespace ControlPAP
 
         private void btnEntrar_Click(object sender, EventArgs e)
         {
-            if (Funciones.PersonaFun.verificarDatos(txtBxUsuario.Text, txtBxContraseña.Text) == Mensajes.General.Ok)
+            if (PersonaFun.verificarDatos(txtBxUsuario.Text, txtBxContraseña.Text) == Mensajes.General.Ok)
             {
                 if (nivel)
                 {
-                    formInicio inicio = new formInicio(txtBxUsuario.Text);
+                    var inicio = new formInicio(txtBxUsuario.Text);
 
                     Hide();
                     inicio.ShowDialog(this);
@@ -69,7 +62,7 @@ namespace ControlPAP
                 }
                 else
                 {
-                    formVenta venta = new formVenta(txtBxUsuario.Text);
+                    var venta = new formVenta(txtBxUsuario.Text);
 
                     Hide();
                     venta.ShowDialog(this);
@@ -80,7 +73,7 @@ namespace ControlPAP
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            formDetalle detalle = new formDetalle("", "Administrador", "Agregar");
+            var detalle = new formDetalle("", "Administrador", "Agregar");
 
             Hide();
             detalle.ShowDialog(this);

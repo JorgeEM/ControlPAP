@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ControlPAP.Vistas
 {
     public partial class formAdministrar : Form
     {
-        private string usuario;
-        private string precedencia;
+        private readonly string usuario;
+        private readonly string precedencia;
 
         public formAdministrar(string usuario, string precedencia)
         {
@@ -37,10 +30,10 @@ namespace ControlPAP.Vistas
 
         private void btnClick(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            string seleccion = (string)btn.Tag;
+            var btn = (Button) sender;
+            var seleccion = (string) btn.Tag;
 
-            formDetalle detalle = new formDetalle(usuario, precedencia, seleccion);
+            var detalle = new formDetalle(usuario, precedencia, seleccion);
             Hide();
             detalle.ShowDialog(this);
             Show();

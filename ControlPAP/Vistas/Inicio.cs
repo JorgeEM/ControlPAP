@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ControlPAP.Vistas
 {
     public partial class formInicio : Form
     {
-        private string usuario;
+        private readonly string usuario;
 
         public formInicio(string usuario)
         {
@@ -31,12 +24,13 @@ namespace ControlPAP.Vistas
             btnEmpleado.Click += btnClick;
         }
 
+        //Un metodo boton para todos los botones e implementa el uso de una etiqueta
         private void btnClick(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            string precedencia = (string)btn.Tag;
+            var btn = (Button) sender;
+            var precedencia = (string) btn.Tag;
 
-            formAdministrar administrar = new formAdministrar(usuario, precedencia);
+            var administrar = new formAdministrar(usuario, precedencia);
             Hide();
             administrar.ShowDialog(this);
             Show();
